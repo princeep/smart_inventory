@@ -48,4 +48,34 @@ public class ProductDAOImpl implements ProductDAO {
             e.printStackTrace();
         }
     }
+    @Override
+    public void updateProduct(Product product) {
+
+        String sql =
+                "update products set quantity=? where id=?";
+
+        try {
+
+            Connection con =
+                    DBConnection.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ps.setInt(1,
+                    product.getQuantity());
+
+            ps.setInt(2,
+                    product.getId());
+
+            ps.executeUpdate();
+
+            System.out.println("Updated");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
 }
