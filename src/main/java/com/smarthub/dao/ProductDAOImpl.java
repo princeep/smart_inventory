@@ -78,4 +78,30 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
 
+    @Override
+    public void deleteProduct(int id) {
+
+        String sql =
+                "delete from products where id=?";
+
+        try {
+
+            Connection con =
+                    DBConnection.getConnection();
+
+            PreparedStatement ps =
+                    con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+
+            System.out.println("Deleted");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
 }
