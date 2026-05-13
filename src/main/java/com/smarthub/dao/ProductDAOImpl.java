@@ -22,7 +22,30 @@ public class ProductDAOImpl implements ProductDAO {
             System.out.println("Product added");
 
         } catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void viewProducts(){
+        String sql = "select * from products";
+
+        try{
+            Connection con = DBConnection.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                System.out.println(
+                        rs.getInt("id") + " | " +
+                                rs.getString("name") + " | " +
+                                rs.getString("category") + " | " +
+                                rs.getDouble("price") + " | " +
+                                rs.getInt("quantity")
+                );
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
